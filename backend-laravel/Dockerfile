@@ -40,15 +40,18 @@ RUN mkdir -p storage/framework/{sessions,views,cache} \
     && chmod -R 777 storage \
     && chmod -R 775 bootstrap/cache
 
-# Note: Alpine doesn't have www-data user by default, create it
-RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
+# Create www-data user/group if it doesn't exist (PHP images may already have it)
+RUN addgroup -g 82 -S www-data 2>/dev/null || true && \
+    adduser -u 82 -D -S -G www-data www-data 2>/dev/null || true
+
+# Set ownership
 RUN chown -R www-data:www-data /var/www
 
 # Use PORT environment variable from Render
 ENV PORT=8000
 
 # Expose the port (will be overridden by Render's PORT env var)
-EXPOSE $PORT
+EXPOSE 8000
 
 # Start PHP built-in server with dynamic port
 CMD php artisan serve --host=0.0.0.0 --port=${PORT}
