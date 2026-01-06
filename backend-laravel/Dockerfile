@@ -52,23 +52,3 @@ EXPOSE $PORT
 
 # Start PHP built-in server with dynamic port
 CMD php artisan serve --host=0.0.0.0 --port=${PORT}
-
-APP_NAME=Laravel
-APP_ENV=production
-APP_KEY=base64:YOUR_KEY_HERE
-APP_DEBUG=false
-APP_URL=https://your-app-name.onrender.com
-
-DB_CONNECTION=mysql
-DB_HOST=your-railway-mysql-host
-DB_PORT=3306
-DB_DATABASE=your-database
-DB_USERNAME=your-username
-DB_PASSWORD=your-password
-
-LOG_CHANNEL=stack
-LOG_LEVEL=debug
-
-SESSION_DRIVER=file
-CACHE_DRIVER=file
-QUEUE_CONNECTION=sync
